@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<contentpackage name="Protein Cookie" modversion="1.0.0" corepackage="False" gameversion="1.8.8.1">
+  <Item file="%ModDir%/Items/Medical/ProteinCookie.xml" />
+</contentpackage>

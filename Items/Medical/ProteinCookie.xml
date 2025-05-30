@@ -1,0 +1,42 @@
+<!-- Name: Protein bar -->
+  <!-- Provides slow healing for damage and burns. Only at vending machines. -->
+  <!-- *************************************************************************************************************************************************************************** -->
+  <ProteinCookie name="Protein Cookie" identifier="proteincookie" description="The ultimate filling snack." category="Medical,Material" maxstacksize="32" maxstacksizecharacterinventory="8" cargocontaineridentifier="chemicalcrate" Tags="smallitem,medical" useinhealthinterface="true" scale="0.5" impactsoundtag="impact_metal_light">
+    <Upgrade gameversion="0.10.0.0" scale="0.5" />
+    <PreferredContainer secondary="wreckmedcab,abandonedmedcab,piratemedcab" amount="1" spawnprobability="0.1" />
+    <PreferredContainer secondary="abandonedcrewcab,piratecrewcab" minamount="1" maxamount="2" spawnprobability="0.15" />
+    <PreferredContainer primary="crewcab"/>
+    <Fabricate suitablefabricators="vendingmachine" requiredtime="1" requiredmoney="40" fabricationlimitmin="5" fabricationlimitmax="10"/>
+    <InventoryIcon texture="ProteinCookie.png" sourcerect="0,0,64,64" origin="0.5,0.5" />
+    <Sprite texture="ProteinCookie2.png" sourcerect="0,0,36,44" depth="0.6" origin="0.5,0.5" />
+    <Body width="35" height="35" density="10.1" />
+    <Holdable canBeCombined="true" removeOnCombined="true" slots="Any,RightHand,LeftHand" aimpos="32,15" holdangle="0" aimangle="90" aimable="false" msg="ItemMsgPickUpSelect">
+      <StatusEffect type="OnSecondaryUse" target="This" Condition="-30.0">
+        <ParticleEmitter particle="brownchunks" AngleMin="80" AngleMax="100" DistanceMin="15" DistanceMax="25" VelocityMin="40" VelocityMax="60" ScaleMin="0.08" ScaleMax="0.15" EmitInterval=".75" ParticleAmount="6" InitialDelay="0.2" CopyEntityAngle="True" ColorMultiplier="255,255,255,255" LifeTimeMultiplier="0.35" />
+      </StatusEffect>
+      <StatusEffect type="OnSecondaryUse" target="This">
+        <Conditional Condition="gte 99" />
+        <Sound file="Content/Items/Medical/ITEM_proteinBarOpen.ogg" range="250" />
+      </StatusEffect>
+      <StatusEffect type="OnSecondaryUse" target="This">
+        <Conditional Condition="lt 95" />
+        <Sound file="Content/Items/Medical/ITEM_eatingLoop.ogg" range="250" loop="true" />
+      </StatusEffect>
+      <StatusEffect type="OnSecondaryUse" target="This,Character" disabledeltatime="true">
+        <Conditional Condition="lte 1" />
+        <Use/>
+      </StatusEffect>
+      <StatusEffect type="OnUse" target="This" Condition="-100.0" setvalue="true">
+        <Conditional Condition="gt 1" />
+        <Sound file="Content/Items/Medical/ITEM_eatingBiteQuick.ogg" range="250" />
+      </StatusEffect>
+      <StatusEffect type="OnUse" target="UseTarget" stackable="false" duration="4">
+        <ReduceAffliction type="damage" amount=".5" />
+        <ReduceAffliction type="burn" amount=".25" />
+        <Affliction identifier="strengthen" amount="8.75" />
+      </StatusEffect>  
+      <StatusEffect type="OnBroken" target="This">
+        <Remove />
+      </StatusEffect>
+    </Holdable>
+  </ProteinCookie>
